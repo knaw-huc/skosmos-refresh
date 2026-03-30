@@ -26,7 +26,8 @@ def refresh():
         return abort(404)
 
 if __name__ == '__main__':
-    with open('/app/src/refresh.yml', 'r') as f:
+    refresh_path = get_env('REFRESH_PATH')
+    with open(f'{refresh_path}/refresh.yaml', 'r') as f:
         config = yaml.load(f, Loader=yaml.SafeLoader)['vocab']
         print(config)
         path = config['path']
