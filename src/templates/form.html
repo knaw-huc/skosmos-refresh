@@ -12,6 +12,9 @@
         text-align: center;
         margin: 2em 0 0 0;
     }
+    p.hide {
+        display: none;
+    }
     </style>
 </head>
 
@@ -25,6 +28,12 @@
             <input type="text"
                    name="token"
                    placeholder="token"/>
+            </p>
+            <p class="hide">
+             <input type="text"
+                   name="url"
+                   placeholder="url"
+                   value="{{ url }}"/>
             </p>
             <button type="submit">Refresh</button>
         </form>
