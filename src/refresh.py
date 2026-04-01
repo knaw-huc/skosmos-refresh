@@ -11,20 +11,19 @@ paths = {}
 @app.route(f'/<path>')
 def form(path):
     if path in paths:
-        return render_template('form.html',url=request.base_url)
+        return render_template('form.html')
     else:
         return abort(404)
 
 @app.route('/refresh', methods=['POST'])
 def refresh():
-    url = request.form['url']
     token = request.form['token']
-    path = url.split('/')[-1]
+    path = request.headers['Referer'].split('/')[-1]
     if token == config[paths[path]]['token']:
         open(config[paths[path]]['refresh'],'w')
         return render_template('done.html',
-                                message=config['message'],
-                                url=config['link'])
+                                message=config[paths[path]]['message'],
+                                url=config[paths[path]]['link'])
     else:
         return abort(404)
 
